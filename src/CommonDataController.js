@@ -2,7 +2,6 @@ const AES256Crypto = require('./AES256Crypto');
 const RedisDatastore = require('./RedisDatastore');
 const CommonData = require('./CommonData');
 
-
 // Use JSON Schema to validate the payload, not the prettiest thing in the world
 // But it saves us a ton of time!
 const getValidationErrors = function(input, schemaName) {

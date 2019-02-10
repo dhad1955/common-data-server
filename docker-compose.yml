@@ -1,0 +1,14 @@
+web:
+  build: .
+  environment:
+    - HTTP_PORT=3000
+    - REDIS_PORT=6379
+    - REDIS_ENDPOINT=redis
+  volumes:
+    - "./app:/src/app"
+  ports:
+    - "3000:3000"
+  links:
+    - redis
+redis:
+  image: redis

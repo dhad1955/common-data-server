@@ -1,13 +1,15 @@
 const crypto = require('crypto');
-const ALGORITHM = 'aes-256-ctr';
-const SECRET_LENGTH_MIN = 6;
 const bcrypt = require('bcrypt');
+
+const SECRET_LENGTH_MIN = 6;
+const ALGORITHM = 'aes-256-ctr';
 
 const AES256Crypto = function(secret) {
     if (!secret || typeof secret !== 'string') {
         throw new Error('Secret must be of type \'string\'');
     }
 
+    // its good practice to make it have a minimum length 6 seems reasonable.
     if(secret.length < SECRET_LENGTH_MIN) {
         throw new Error(`Secret must have minimum length of ${SECRET_LENGTH_MIN}`);
     }
@@ -25,6 +27,9 @@ const AES256Crypto = function(secret) {
         return bcrypt.compareSync(secret, encryptedSecret);
     };
 
+    // This algorithm copied from the web
+    // Compile a string of the IV + the actual encrypted string then split it when decrypting
+    // At least this way we dont have to store or keep track of the IV
     this.encrypt = function(value) {
         if(typeof value !== 'string') {
             throw new Error('Text must be of type \'string\'');

@@ -98,9 +98,6 @@ describe('When I call the store endpoint and then retrieve the data', () => {
         });
 
         it('When searching a wildcard we should get all of the results back', async() => {
-            let promises = [];
-
-            await Promise.all(promises);
 
             let result = await httpRequest('post', '/common/search', {
                 id: 'wildcard-integration-test*',
